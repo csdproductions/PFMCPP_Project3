@@ -171,61 +171,60 @@ struct CarWash //2)
     Car carBeingServiced;  
 };
 
-
 /*
-1)
+1) Games Console
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) control pads
+    2) disc drive
+    3) storage hard drive
+    4) hdmi outputs
+    5) network connection
 3 things it can do:
-    1)
-    2)
-    3)
+    1) read discs
+    2) play games
+    3) connect to network
  */
 
 /*
-2)
+2) Dog
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) fur colour
+    2) age
+    3) breed
+    4) name
+    5) sex
 3 things it can do:
-    1)
-    2)
-    3)
+    1) fetch
+    2) sit
+    3) heel
  */
 
 /*
-3)
+3) Bicycle
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) frame
+    2) wheels
+    3) brakes
+    4) pedals
+    5) handlebars
 3 things it can do:
-    1)
-    2)
-    3)
+    1) move forwards
+    2) bunny hop
+    3) wheelie
  */
 
 /*
-4)
+4) Electric Guitar
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) body
+    2) neck
+    3) strings
+    4) pickups
+    5) frets
 3 things it can do:
-    1)
-    2)
-    3)
+    1) output sound
+    2) change tone
+    3) change pickup
  */
 
 /*
