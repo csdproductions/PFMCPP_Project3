@@ -176,7 +176,7 @@ struct CarWash //2)
 5 properties:
     1) control pads
     2) disc drive
-    3) storage hard drive
+    3) usb ports
     4) hdmi outputs
     5) network connection
 3 things it can do:
