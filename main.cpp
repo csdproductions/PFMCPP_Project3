@@ -298,17 +298,17 @@ struct CarWash //2)
  */
 
 /*
-10)
+10) Soccer Team
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Staff
+    2) Jerseys
+    3) Training Complex
+    4) Stadium
+    5) Supporters
 3 things it can do:
-    1)
-    2)
-    3)
+    1) Play A Match
+    2) Run a Training Session
+    3) Sign a Player
  */
 
 #include <iostream>
