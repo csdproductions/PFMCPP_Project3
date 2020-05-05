@@ -121,87 +121,87 @@ You are going to write 10 UDTs in project3.
  */
 
 /*
-5)
+5) Staff
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) type
+    2) sex
+    3) age
+    4) hours of work
+    5) days of work
 3 things it can do:
-    1)
-    2)
-    3)
+    1) go to work
+    2) attend meeting
+    3) sign a contract
  */
 
 /*
-6)
+6) program (male, female, or junior team)
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) sex
+    2) age range
+    3) professional status
+    4) number of staff
+    5) total number of programs
 3 things it can do:
-    1)
-    2)
-    3)
+    1) enter a league
+    2) determine player's program
+    3) advertise for players
  */
 
 /*
-7)
+7) Training Complex
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) reception
+    2) canteen
+    3) gym
+    4) locker room
+    5) car Park
 3 things it can do:
-    1)
-    2)
-    3)
+    1) host training session
+    2) feed staff
+    3) provide player rehab
  */
 
 /*
-8)
+8) Stadium
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) seats
+    2) bars
+    3) gates
+    4) executive boxes
+    5) staircases
 3 things it can do:
-    1)
-    2)
-    3)
+    1) host an event
+    2) open gates
+    3) sell food
  */
 
 /*
-9)
+9) Supporters
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) total number
+    2) location
+    3) distance from club's city
+    4) member of supporters group
+    5) cheer team
 3 things it can do:
-    1)
-    2)
-    3)
+    1) join supporters group
+    2) buy jersey
+    3) go to away match
  */
 
 /*
-10) Soccer Team
+10) Sports Team
 5 properties:
-    1) Staff
-    2) Jerseys
-    3) Training Complex
-    4) Stadium
-    5) Supporters
+    1) staff
+    2) program
+    3) training complex
+    4) stadium
+    5) supporters
 3 things it can do:
-    1) Play A Match
-    2) Run a Training Session
-    3) Sign a Player
+    1) play a match
+    2) run a training session
+    3) sign a player
  */
 
 /*
