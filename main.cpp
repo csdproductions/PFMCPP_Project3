@@ -130,7 +130,6 @@ struct CarWash //                                   1) define an empty struct fo
 
 struct GamesConsole
 {
-
     //control pads
     int noOfControlPads = 2;
     // storage drive size
@@ -175,7 +174,7 @@ struct Dog
     //name
     std::string name = "Luna";
     //sex
-    std::string sex = "Female";
+    bool isFemale = true;
 
     //fetch 
     void fetch(std::string ballType = "Tennis");
@@ -234,18 +233,18 @@ struct Bicycle
     3) change pickup
  */
 
-struct ElectricGuitar{
-
+struct ElectricGuitar
+{
     //body wood - 1 = maple, 2 = oak
-    int bodyWood = 1;
+    int bodyWoodType = 1;
     //neck joint glued
-    bool neckJointGlued = false;
+    bool isNeckJointGlued = false;
     //strings gauge
     int eStringGauge = 13;
     //pickups type
     std::string pickupsType = "Humbucker";
     //no of frets 
-    int noOfFrets = 24;
+    int numFrets = 24;
 
     //output sound
     void outputSound(int fretPlayed);
@@ -270,8 +269,8 @@ struct ElectricGuitar{
     3) sign a contract
  */
 
- struct Staff{
-
+ struct Staff
+ {
     //type
     std::string type = "Player";
     //sex
@@ -308,15 +307,15 @@ struct ElectricGuitar{
 struct TeamProgram
 {
     //sex
-    std::string sex = "Male";
+    bool isMale = true;
     //maximum age
     int maxAge = 21;
     //professional status
     std::string profStatus = "Semi-Professional";
     //number of staff
-    int noOfStaff = 6;
+    int numStaff = 6;
     //total number of programs
-    int totalNoOfPlayers = 22;
+    int numPlayersInProgram = 22;
 
 
     //enter a league
@@ -343,7 +342,6 @@ struct TeamProgram
 
 struct TrainingComplex
 {
-
     //receptionist of the day
     std::string receptionistName = "Dave";
     //no of meals served in canteen a day
@@ -394,13 +392,13 @@ struct Stadium
     struct ConcessionStand
     {
         //stand type (1 for food/drink, 2 for merchandise)
-        int standType = 1;
+        int type = 1;
         //does it have a liqour license
-        bool liquorLicense = false;
+        bool hasLiquorLicense = false;
         //min no of staff required to run it
-        int minNoOfStaff = 6;
+        int minNumStaffRequired = 6;
         //max no of staff required
-        int maxNoOfStaff = 8;
+        int maxNumStaffRequired = 8;
         //name of stand
         std::string name = "Dave's magical hot-dogs";
 
@@ -439,10 +437,15 @@ struct Stadium
 
 struct SupportersGroup
 {
+    //name of group
     std::string name = "Queen City Hooligans";
-    int noOfMembers = 120;
-    int noOfSeasonTickets = 60;
+    //number of members
+    int numMembers = 120;
+    //num of season tickets in group
+    int numSeasonTickets = 60;
+    //merch discount
     float merchDiscountFromClub = 10.f;
+    //cost of membership
     float costOfMembership = 100.f;
 
     struct Supporter
@@ -454,9 +457,9 @@ struct SupportersGroup
         //distance from club's city
         float distanceFromClubsCity = 123.f;
         //season ticket holder
-        bool seasonTicketHolder = false;
+        bool isSeasonTicketHolder = false;
         //no of meetings attended
-        int noOfMeetingsAttended = 3;
+        int numMeetingsAttended = 3;
 
         // join supporters group
         void joinSupportersGroup();
