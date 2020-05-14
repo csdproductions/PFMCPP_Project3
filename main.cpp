@@ -1,4 +1,7 @@
- /*
+#include <string> 
+#include <iostream>
+ 
+/*
  Project 3 - Part 2 / 5
  Video: Chapter 2 Part 6
  Implementations tasks
@@ -14,6 +17,68 @@ Create a branch named Part2
     you should be able to deduce the return type of those functions based on their usage in Person::run()
     You'll need to insert the Person struct from the video in the space below.
  */
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    bool isFemale;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+
+    void run(int howFast, bool startWithLeftFoot);
+
+    struct Foot
+    {   
+        int numOfSteps;
+        void stepForward(int howFast);
+        int stepSize(float averageStepSize);
+    };
+
+    Foot leftFoot;
+    Foot rightFoot;
+};
+
+void Person::Foot::stepForward(int howFast)
+{
+    numOfSteps += (1*howFast);
+}
+
+int Person::Foot::stepSize(float averageStepSize)
+{
+    return static_cast<int>(numOfSteps * averageStepSize);
+}
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{ 
+    if(startWithLeftFoot)
+    {
+        leftFoot.stepForward(howFast);
+        rightFoot.stepForward(howFast);
+    }
+    else
+    {
+        rightFoot.stepForward(howFast);
+        leftFoot.stepForward(howFast);
+    }
+    
+    
+
+    //To find approximate stride size for women, multiply 0.413 by height in centimeters. Men should multiply 0.415 by their height in centimeters.
+    
+    //distanceTraveled output will be in cm's
+    if(isFemale)
+    {   
+
+        distanceTraveled = leftFoot.stepSize(height * 0.413f) + rightFoot.stepSize(height * 0.413f);
+    }
+    else
+    {
+        distanceTraveled = leftFoot.stepSize(height * 0.415f) + rightFoot.stepSize(height * 0.415f);
+    }
+        
+}
 
 
 
@@ -28,55 +93,51 @@ Create a branch named Part2
  */
 
 
-
-/*
-1) Games Console
-5 properties:
-    1) control pads
-    2) disc drive
-    3) usb ports
-    4) hdmi outputs
-    5) network connection
-3 things it can do:
-    1) read discs
-    2) play games
-    3) connect to network
- */
-
 struct GamesConsole
 {
     //control pads
-    int noOfControlPads = 2;
+    int numControlPads = 2;
     // storage drive size
     float storageDriveSize = 128.f;
     // usb ports
-    int noOfUsbPorts = 4;
-    // hdmi outputs
-    int noOfHdmiOutputs = 3;
+    int numUsbPorts = 4;
+    // current game
+    std::string currentGame;
     // network connections
     int networkConnection = 2;
 
     // read discs
     void readDisc(std::string gameDisc = "Grand Theft Auto");
     // play games
-    void playGame(int noOfPlayers = 8);
+    void playGame(int numPlayers = 8);
     // connect to network - return if connection successful
     bool connectToNetwork(float connectionSpeed = 1000.f);
 };
 
-/*
-2) Dog
-5 properties:
-    1) fur colour
-    2) age
-    3) breed
-    4) name
-    5) sex
-3 things it can do:
-    1) fetch
-    2) sit
-    3) heel
- */
+void GamesConsole::readDisc(std::string myGame)
+{
+    currentGame = myGame;
+}
+
+void GamesConsole::playGame(int numPlayers)
+{
+    if(numPlayers > numControlPads)
+    {
+        std::cout << "Sorry, Not enough control pads" << std::endl;
+    }
+}
+
+bool GamesConsole::connectToNetwork(float connectionSpeed)
+{
+    if(connectionSpeed > 1.f)
+    {
+        return true;
+    }     
+    else
+    {
+        return false;
+    }
+}
 
 struct Dog
 {
@@ -94,24 +155,39 @@ struct Dog
     //fetch 
     void fetch(std::string ballType = "Tennis");
     //sit
-    void sit(std::string treatType = "Peanut Butter");
+    void giveTreat(std::string treatType = "Peanut Butter", int numOfTreats = 4);
     //heel
-    void heel();
+    float exerciseTime();
 };
 
-/*
-3) Bicycle
-5 properties:
-    1) frame size
-    2) wheel size
-    3) brakes model
-    4) pedals type
-    5) handlebars type
-3 things it can do:
-    1) move forwards
-    2) bunny hop
-    3) wheelie
- */
+void Dog::fetch(std::string ballType)
+{
+    if(ballType == "Tennis")
+    {
+        giveTreat("Dog Biscuits");
+    }
+}
+
+void Dog::giveTreat(std::string treatType, int numOfTreats)
+{
+    if(name == "Luna")
+    {
+        std::cout << "Give Luna " << numOfTreats << " of " << treatType << std::endl;
+    }
+}
+
+float Dog::exerciseTime()
+{
+    float exerciseTimeCalculator = age * 12 * 6;
+    if(exerciseTimeCalculator > 75.f)
+    {
+        return 75.f;
+    }
+    else
+    {
+        return exerciseTimeCalculator;
+    } 
+}
 
 struct Bicycle
 {
@@ -127,26 +203,34 @@ struct Bicycle
     int handlebarsType = 1;
 
     //move forwards - return 
-    float moveForwards();
+    float moveForwards(int numOfRevolutions);
     //bunny hop - return height
-    float bunnyHop();
+    float bunnyHop(float maximumWheelHeight);
     //wheelie
     bool popWheelie();
 };
 
-/*
-4) Electric Guitar
-5 properties:
-    1) body wood
-    2) is neck joint glued
-    3) high e string gauge
-    4) pickups type
-    5) no of frets 
-3 things it can do:
-    1) output sound
-    2) change tone
-    3) change pickup
- */
+float Bicycle::moveForwards(int numOfRevolutions)
+{
+    return (3.14f * wheelRimSize) * numOfRevolutions;
+}
+
+float Bicycle::bunnyHop(float maximumWheelHeight)
+{
+    return maximumWheelHeight - wheelRimSize;
+}
+
+bool Bicycle::popWheelie()
+{
+    if(handlebarsType == 1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 
 struct ElectricGuitar
 {
@@ -155,37 +239,56 @@ struct ElectricGuitar
     //neck joint glued
     bool isNeckJointGlued = false;
     //strings gauge
-    int eStringGauge = 13;
-    //pickups type
-    std::string pickupsType = "Humbucker";
+    float tonepotSetting = 1.0f;
+    //pickups position
+    int pickupPositionSelector = 1;
     //no of frets 
     int numFrets = 24;
 
     //output sound
-    void outputSound(int fretPlayed);
+    float outputSound(int fretPlayed);
     //change tone - return tone resistance value
-    float changeTone(bool isSoloNow);
+    void changeTone(bool isSoloNow);
     //change pickup - return
-    int selectPickup(int songStyle);
+    void selectPickup(std::string songStyle);
 };
 
+float ElectricGuitar::outputSound(int fretPlayed)
+{
+    //very simplified frequency calculator/just plain wrong but you get the jist!
+    return 344/(2*(numFrets - fretPlayed));
+}
 
-/*
-5) Staff
-5 properties:
-    1) type
-    2) sex
-    3) age
-    4) hours of work
-    5) days of work
-3 things it can do:
-    1) go to work
-    2) attend meeting
-    3) sign a contract
- */
+void ElectricGuitar::changeTone(bool isSoloNow)
+{
+    if(isSoloNow)
+    {
+        tonepotSetting = 1.0f;
+    }
+    else
+    {
+        tonepotSetting = 10.0f;
+    }
+}
 
- struct Staff
- {
+void ElectricGuitar::selectPickup(std::string songStyle)
+{
+    if(songStyle == "Rock")
+    {
+        pickupPositionSelector = 5;
+    }
+    else if(songStyle == "pop")
+    {
+        pickupPositionSelector = 1;
+    }
+    else
+    {
+        pickupPositionSelector = 3;
+    }
+}
+
+struct Staff
+{
     //type
     std::string type = "Player";
     //sex
@@ -196,28 +299,46 @@ struct ElectricGuitar
     float hoursOfWork = 37.5f;
     //days of work
     int daysOfWork = 5;
+    
+    bool hitOvertime = false;
+
+    std::string injuryType;
+
+    float salary = 20000.f;
 
     //go to work
-    void goToWork();
+    void goToWork(float numHoursToday);
     //attend meeting
     void attendMeeting();
     //sign a contract
     bool signContract(float contractOffer = 20000.f);
- };
+};
 
-/*
-6) program (male, female, or junior team)
-5 properties:
-    1) sex
-    2) maximum age
-    3) professional status
-    4) number of staff
-    5) total number of programs
-3 things it can do:
-    1) enter a league
-    2) determine player's program
-    3) advertise for players
- */
+void Staff::goToWork(float numHoursToday)
+{
+    hoursOfWork -= numHoursToday;
+    if(hoursOfWork < 0)
+    {
+        hitOvertime = true;
+    }
+}
+
+void Staff::attendMeeting()
+{
+    std::cout << "All onsite meetings cancelled - login to Zoom" << std::endl;
+}
+
+bool Staff::signContract(float contractOffer)
+{
+    if(contractOffer > 20000.f)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 struct TeamProgram
 {
@@ -228,73 +349,94 @@ struct TeamProgram
     //professional status
     std::string profStatus = "Semi-Professional";
     //number of staff
-    int numStaff = 6;
+    int numCoaches = 6;
     //total number of programs
     int numPlayersInProgram = 22;
+    int maxNumPlayersInProgram = 26;
 
+    float budgetPerAnnum;
+    float currentBalance;
+
+    bool isGameAtHome;
 
     //enter a league
-    void enterALeague();
-    //determine player's program
-    void playersProgram();
+    void enterALeague(float costToEnterLeague);
+    //determine number of coaches required
+    int numCoachesRequired();
     //advertise for players
-    void advertiseForPlayers(int howManySpacesLeft = 4);
+    int advertiseForPlayers();
 };
 
-/*
-7) Training Complex
-5 properties:
-    1) receptionist of the day
-    2) no of meals served in canteen a day
-    3) maximum deadlift weight in gym
-    4) no of lockers in locker room
-    5) no of car park spots
-3 things it can do:
-    1) host training session
-    2) feed staff
-    3) provide player rehab
- */
+void TeamProgram::enterALeague(float costToEnterLeague)
+{
+    currentBalance -= costToEnterLeague;
+}
+
+int TeamProgram::numCoachesRequired()
+{
+    if(isGameAtHome)
+    {
+        return numCoaches;
+    }
+    else
+    {
+        return numCoaches/2;
+    }
+}
+
+int TeamProgram::advertiseForPlayers()
+{
+    return maxNumPlayersInProgram - numPlayersInProgram;
+}
 
 struct TrainingComplex
 {
-    //receptionist of the day
-    std::string receptionistName = "Dave";
+    //address of complex
+    std::string address = "1234 Sports Street";
     //no of meals served in canteen a day
-    int noOfMealsServed = 122;
+    int numMealsServed = 122;
     //maximum deadlift weight in gym
     float maxDeadliftWeight = 500.f;
     //no of lockers in locker room
-    int noOfLockers = 100;
+    int numLockers = 100;
     //no of car park spots
-    int noOfCarParkSpots = 75;
+    int numCarParkSpots = 75;
+
+    float costPerMeal = 1.23f;
+
+    std::string therapyType;
 
     //host training session
-    void hostTrainingSession();
+    int numOfFreeParkingSpaces(TeamProgram myTeam);
     //feed staff
-    void feedStaff(int howManyStaffWorkingToday = 75);
+    float costToFeedStaff(int howManyStaffWorkingToday = 75, int numTrainingSessions = 2);
     //provide player rehab
     void providePlayerRehab(Staff player);
 };
 
+int TrainingComplex::numOfFreeParkingSpaces(TeamProgram myTeam)
+{
+    return (myTeam.numPlayersInProgram + myTeam.numCoaches) - numCarParkSpots;
+}
 
-/*
-8) Stadium
-5 properties:
-    1) capacity
-    2) name
-    3) turf type
-    4) bool executive boxes open
-    5) staircase names
-3 things it can do:
-    1) host an event
-    2) open gates
-    3) restock a concession stand
- */
+float TrainingComplex::costToFeedStaff(int howManyStaffWorkingToday, int numTrainingSessions)
+{
+    numMealsServed = howManyStaffWorkingToday * numTrainingSessions;
+    return numMealsServed * costPerMeal;
+}
+
+void TrainingComplex::providePlayerRehab(Staff player)
+{
+    if(player.injuryType == "Muscular")
+    {
+        therapyType = "Massage";
+    }
+}
 
 struct Stadium
 {
     //capacity
-    int noOfSeats = 44000;
+    int numSeats = 44000;
     //stadium name
     std::string name = "Paul Brown Stadium";
     //turf type (1 = grass, 2 = turf)
@@ -302,7 +444,11 @@ struct Stadium
     //are executive boxes open
     bool boxesOpen = true;
     //no of staircases
-    int noOfStaircases = 22;
+    int numStaircases = 22;
+
+    bool gatesOpen;
+
+    int numTicketsSold;
 
     struct ConcessionStand
     {
@@ -317,38 +463,67 @@ struct Stadium
         //name of stand
         std::string name = "Dave's magical hot-dogs";
 
+
         //check customer ID
         bool isCustomerOfAge(int customerAge = 22);
         //display which customer order will be ready next
-        int displayNextReadyCustomerOrders();
+        void displayNextReadyCustomerOrder(int nextCustomerOrderNum);
         //take order from customer
         void takeCustomerOrder();
     };
     
     //host an event
-    void hostAnEvent();
+    void hostAnEvent(std::string eventType);
     //open gates
     void openGates();
-    //restock a concession stand
-    void restockConcessionStand(ConcessionStand myConcessionStand);
+    //staff a concession stand
+    int remainingTickets();
 
     ConcessionStand myConcessionStand;
 };
 
+bool Stadium::ConcessionStand::isCustomerOfAge(int customerAge)
+{
+    if(customerAge >= 21)
+    {
+        return true;
+    }else
+    {
+        return false;
+    }
+}
 
-/*
-9) Supporter Group
-5 properties:
-    1) name
-    2) no of members
-    3) no of season tickets
-    4) merch discount from club
-    5) cost of membership
-3 things it can do:
-    1) arrange trip to away match
-    2) add a new member
-    3) email a member on their birthday
- */
+void Stadium::ConcessionStand::displayNextReadyCustomerOrder(int nextCustomerOrderNum)
+{
+    std::cout << nextCustomerOrderNum << " is ready for Collection!" << std::endl;
+}
+
+void Stadium::ConcessionStand::takeCustomerOrder()
+{
+    std::cout << "What would you like today" << std::endl;
+}
+
+void Stadium::hostAnEvent(std::string eventType)
+{
+    if(eventType == "Sports")
+    {
+        turfType = 1;
+    }else
+    {
+        turfType = 2;
+    }
+}
+
+void Stadium::openGates()
+{
+    gatesOpen = true;
+    boxesOpen = true;
+}
+
+int Stadium::remainingTickets()
+{
+    return numSeats-numTicketsSold;
+}
 
 struct SupportersGroup
 {
@@ -376,41 +551,64 @@ struct SupportersGroup
         //no of meetings attended
         int numMeetingsAttended = 3;
 
+        std::string name;
+
         // join supporters group
-        void joinSupportersGroup();
+        void buySeasonTicket();
         // buy jersey
-        void buyJersey();
+        float totalCostOfMerchandise(float jerseyCost);
         // go to away match
-        void goToAwayMatch(std::string awayCity = "Salt Lake");
+        void attendMeeting();
     };
 
     //Arrange trip to away match
-    void organiseAwayMatchTrip(int noOfSupporters = 20);
+    float costOfAwayMatchTrip(int noOfSupporters = 20);
     //Add a new member
-    void admitNewMember(Supporter mySupporter);
+    float numSeasonTicketsPerMember();
     //Email a member on their birthday
-    void emailMemberOnBirthday(Supporter mySupporter);
+    void emailMemberOnBirthday();
 
     Supporter mySupporter;
 };
 
+void SupportersGroup::Supporter::buySeasonTicket()
+{
+    isSeasonTicketHolder = true;
+}
 
-/*
-10) Sports Team
-5 properties:
-    1) staff
-    2) program
-    3) training complex
-    4) stadium
-    5) supporter
-3 things it can do:
-    1) play a match
-    2) run a training session
-    3) sign a player
- */
+float SupportersGroup::Supporter::totalCostOfMerchandise(float jerseyCost)
+{
+    if(jerseySize == "Youth" || jerseySize == "S")
+    {
+        return jerseyCost * 0.75f;
+    }else
+        return jerseyCost;
+}
 
- struct SportsTeam
- {
+void SupportersGroup::Supporter::attendMeeting()
+{
+    numMeetingsAttended++;
+}
+
+float SupportersGroup::costOfAwayMatchTrip(int noOfSupporters)
+{
+    float totalCostofFlights = 200.f * noOfSupporters;
+    float totalHotelCosts = 100.f * noOfSupporters;
+    return totalCostofFlights + totalHotelCosts;
+}
+
+float SupportersGroup::numSeasonTicketsPerMember()
+{
+    return numSeasonTickets/numMembers;
+}
+
+void SupportersGroup::emailMemberOnBirthday()
+{
+    std::cout << "Happy Birthday " << mySupporter.name << " from the " << name << std::endl;
+}
+
+struct SportsTeam
+{
     // staff
     Staff staffMember;
     // program
@@ -425,10 +623,36 @@ struct SupportersGroup
     // play a match
     void playMatch(TeamProgram, Stadium);
     // run a training session
-    void runTrainingSession(TeamProgram, TrainingComplex);
+    float costToFeedStaffPerProgram(TeamProgram, TrainingComplex);
     // sign a player
     bool signAPlayer(Staff);
- };
+};
+
+void SportsTeam::playMatch(TeamProgram myProgram, Stadium myStadium)
+{
+    if(myProgram.isGameAtHome)
+    {
+        myStadium.hostAnEvent("Sports");
+    }
+}
+
+float SportsTeam::costToFeedStaffPerProgram(TeamProgram myProgram, TrainingComplex myTrainingComplex)
+{
+    return myTrainingComplex.costToFeedStaff(myProgram.maxNumPlayersInProgram, 2);
+}
+
+
+bool SportsTeam::signAPlayer(Staff myPlayer)
+{
+    if(myPlayer.signContract(20000.f))
+    {
+        return true;
+    }else 
+    {
+        return false;
+    }
+
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
