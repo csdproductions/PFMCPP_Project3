@@ -625,7 +625,7 @@ bool SportsTeam::signAPlayer(Staff myPlayer)
     if(myPlayer.signContract(20000.f))
     {
         return true;
-    }else 
+    } 
     return false;
 }
 
