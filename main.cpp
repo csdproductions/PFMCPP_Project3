@@ -31,7 +31,7 @@ struct Person
 
     struct Foot
     {   
-        int numOfSteps;
+        int numSteps;
         void stepForward(int howFast);
         int stepSize(float averageStepSize);
     };
@@ -42,12 +42,12 @@ struct Person
 
 void Person::Foot::stepForward(int howFast)
 {
-    numOfSteps += (1*howFast);
+    numSteps += (1*howFast);
 }
 
 int Person::Foot::stepSize(float averageStepSize)
 {
-    return static_cast<int>(numOfSteps * averageStepSize);
+    return static_cast<int>(numSteps * averageStepSize);
 }
 
 void Person::run(int howFast, bool startWithLeftFoot)
@@ -63,21 +63,16 @@ void Person::run(int howFast, bool startWithLeftFoot)
         leftFoot.stepForward(howFast);
     }
     
-    
+    /*To find approximate stride size for women, multiply 0.413 by height in centimeters. Men should multiply 0.415 by their height in centimeters. distanceTraveled output will be in cm's*/
 
-    //To find approximate stride size for women, multiply 0.413 by height in centimeters. Men should multiply 0.415 by their height in centimeters.
-    
-    //distanceTraveled output will be in cm's
     if(isFemale)
     {   
-
         distanceTraveled = leftFoot.stepSize(height * 0.413f) + rightFoot.stepSize(height * 0.413f);
     }
     else
     {
         distanceTraveled = leftFoot.stepSize(height * 0.415f) + rightFoot.stepSize(height * 0.415f);
-    }
-        
+    }       
 }
 
 
@@ -133,10 +128,7 @@ bool GamesConsole::connectToNetwork(float connectionSpeed)
     {
         return true;
     }     
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 struct Dog
@@ -183,10 +175,7 @@ float Dog::exerciseTime()
     {
         return 75.f;
     }
-    else
-    {
-        return exerciseTimeCalculator;
-    } 
+    return exerciseTimeCalculator;
 }
 
 struct Bicycle
@@ -226,10 +215,7 @@ bool Bicycle::popWheelie()
     {
         return false;
     }
-    else
-    {
-        return true;
-    }
+    return true;
 }
 
 struct ElectricGuitar
@@ -334,10 +320,7 @@ bool Staff::signContract(float contractOffer)
     {
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 struct TeamProgram
@@ -378,10 +361,7 @@ int TeamProgram::numCoachesRequired()
     {
         return numCoaches;
     }
-    else
-    {
-        return numCoaches/2;
-    }
+    return numCoaches/2;
 }
 
 int TeamProgram::advertiseForPlayers()
@@ -463,7 +443,6 @@ struct Stadium
         //name of stand
         std::string name = "Dave's magical hot-dogs";
 
-
         //check customer ID
         bool isCustomerOfAge(int customerAge = 22);
         //display which customer order will be ready next
@@ -487,10 +466,8 @@ bool Stadium::ConcessionStand::isCustomerOfAge(int customerAge)
     if(customerAge >= 21)
     {
         return true;
-    }else
-    {
-        return false;
     }
+    return false;
 }
 
 void Stadium::ConcessionStand::displayNextReadyCustomerOrder(int nextCustomerOrderNum)
@@ -508,7 +485,8 @@ void Stadium::hostAnEvent(std::string eventType)
     if(eventType == "Sports")
     {
         turfType = 1;
-    }else
+    }
+    else
     {
         turfType = 2;
     }
@@ -581,8 +559,8 @@ float SupportersGroup::Supporter::totalCostOfMerchandise(float jerseyCost)
     if(jerseySize == "Youth" || jerseySize == "S")
     {
         return jerseyCost * 0.75f;
-    }else
-        return jerseyCost;
+    }
+    return jerseyCost;
 }
 
 void SupportersGroup::Supporter::attendMeeting()
@@ -648,10 +626,7 @@ bool SportsTeam::signAPlayer(Staff myPlayer)
     {
         return true;
     }else 
-    {
-        return false;
-    }
-
+    return false;
 }
 
 /*
