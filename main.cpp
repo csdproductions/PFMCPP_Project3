@@ -38,17 +38,17 @@ int main()
 struct GamesConsole
 {
     //control pads
-    int numControlPads = 2;
+    int numControlPads {0};
     // storage drive size
-    float storageDriveSize = 128.f;
+    float storageDriveSize {0.f};
     // usb ports
-    int numUsbPorts = 4;
+    int numUsbPorts {0};
     // current game
-    std::string currentGame;
+    std::string currentGame {};
     // network connections
-    int networkConnection = 2;
-
-    GamesConsole();
+    int networkConnection {0};
+    
+    GamesConsole() : numControlPads (2), numUsbPorts (4) {}
 
     // read discs
     void readDisc(std::string gameDisc = "Grand Theft Auto");
@@ -58,17 +58,9 @@ struct GamesConsole
     bool connectToNetwork(float connectionSpeed = 1000.f);
 };
 
-GamesConsole::GamesConsole()
-{
-    numControlPads = 0;
-    storageDriveSize = 0.f;
-    numUsbPorts = 0;
-    currentGame = {};
-    networkConnection = 0;
-}
-
 void GamesConsole::readDisc(std::string myGame)
 {
+    std::cout << "This console has " << numUsbPorts << " USB ports and " << numControlPads << " controller pads as a default." << std::endl;
     std::cout << "You are about to play " << myGame << " - Enjoy!" << std::endl;
     currentGame = myGame;
 }
@@ -93,15 +85,15 @@ bool GamesConsole::connectToNetwork(float connectionSpeed)
 struct Dog
 {
     //fur colour
-    std::string furColour = "Brown";
+    std::string furColour;
     //age
-    float age = 1.f;
+    float age;
     //breed
-    std::string breed = "Shih-Tzu";
+    std::string breed;
     //name
-    std::string name = "Luna";
+    std::string name;
     //sex
-    bool isFemale = true;
+    bool isFemale;
 
     Dog();
 
@@ -113,15 +105,14 @@ struct Dog
     float exerciseTime();
 };
 
-Dog::Dog()
-{
-    
-    furColour = {};
-    age = 0.f;
-    breed = {};
-    name = {};
-    isFemale = true;
-}
+Dog::Dog() :
+    furColour ("brown"),
+    age (0.f),
+    breed ("Shih-Tzu"),
+    name ("Luna"),
+    isFemale (false)
+{}
+
 
 void Dog::fetch(std::string ballType)
 {
@@ -133,6 +124,7 @@ void Dog::fetch(std::string ballType)
 
 void Dog::giveTreat(std::string treatType, int numOfTreats)
 {
+    std::cout << "This dog has " << furColour << " colored fur and " << (isFemale ? "is a female." : "is a male.") << std::endl;
     if(name == "Luna")
     {
         std::cout << "Give Luna " << numOfTreats << " " << treatType << std::endl;
@@ -152,26 +144,27 @@ float Dog::exerciseTime()
 struct Bicycle
 {
     //frame size
-    float frameSize = 51.1f;
+    float frameSize;
     //wheel size
-    float wheelRimSize = 18.f;
+    float wheelRimSize;
     //brakes model
-    std::string brakesModel = "Shimano";
+    std::string brakesModel;
     //pedals type (1 for standard, 2 for cleats)
-    int pedalsType = 1;
+    int pedalsType;
     //handlebars type (1 for drops, 2 for straight)
-    int handlebarsType = 1;
+    int handlebarsType;
 
-    Bicycle();
+    Bicycle() : frameSize(51.f), wheelRimSize(18.f), brakesModel("Shimano"), pedalsType(1), handlebarsType(1) {}
 
     //move forwards - return 
-    float moveForwards(int numOfRevolutions);
+    void moveForwards(int numOfRevolutions);
     //bunny hop - return height
     float bunnyHop(float maximumWheelHeight);
     //wheelie
     bool popWheelie();
 };
 
+/*
 Bicycle::Bicycle()
 {
     frameSize = 0.f;
@@ -180,10 +173,12 @@ Bicycle::Bicycle()
     pedalsType = 0;
     handlebarsType = 1;
 }
+*/
 
-float Bicycle::moveForwards(int numOfRevolutions)
+void Bicycle::moveForwards(int numOfRevolutions)
 {
-    return (3.14f * wheelRimSize) * numOfRevolutions;
+    std::cout << "Our standard bike model has " << brakesModel << " brakes and the wheel rims have a diameter of " << wheelRimSize << " inches." << std::endl;
+    std::cout << "You moved forward by: " << (3.14f * wheelRimSize) * numOfRevolutions << std::endl;
 }
 
 float Bicycle::bunnyHop(float maximumWheelHeight)
@@ -204,17 +199,22 @@ bool Bicycle::popWheelie()
 struct ElectricGuitar
 {
     //body wood - 1 = maple, 2 = oak
-    int bodyWoodType = 1;
+    int bodyWoodType;
     //neck joint glued
-    bool isNeckJointGlued = false;
+    bool isNeckJointGlued;
     //strings gauge
-    float tonepotSetting = 1.0f;
+    float tonepotSetting;
     //pickups position
-    int pickupPositionSelector = 1;
+    int pickupPositionSelector;
     //no of frets 
-    int numFrets = 24;
+    int numFrets;
 
     ElectricGuitar();
+
+    void printElectriGuitarConstruct() 
+    {  
+        std::cout << "4) Tonepot is set to " << tonepotSetting << " at the start of the song. " << std::endl;
+    }
 
     //output sound
     float outputSound(int fretPlayed);
@@ -226,11 +226,11 @@ struct ElectricGuitar
 
 ElectricGuitar::ElectricGuitar()
 {
-    bodyWoodType = 0;
+    bodyWoodType = 1;
     isNeckJointGlued = true;
-    tonepotSetting = 0.f;
-    pickupPositionSelector = 0;
-    numFrets = 0;
+    tonepotSetting = 10.f;
+    pickupPositionSelector = 1;
+    numFrets = 24;
 }
 
 float ElectricGuitar::outputSound(int fretPlayed)
@@ -248,7 +248,7 @@ void ElectricGuitar::changeTone(bool isSoloNow)
     }
     else
     {
-        tonepotSetting = 10.0f;
+        std::cout << "No solo right now, tonepot still at starting point of: " << tonepotSetting << "\n";
     }
 }
 
@@ -271,22 +271,22 @@ void ElectricGuitar::selectPickup(std::string songStyle)
 struct Staff
 {
     //type
-    std::string type = "Player";
+    std::string type;
     //sex
-    bool isPlayerMale = true;
+    bool isPlayerMale;
     //age
-    int age = 22;
+    int age;
     //hours of work
-    float hoursOfWork = 37.5f;
+    float hoursOfWork;
     //days of work
-    int daysOfWork = 5;
+    int daysOfWork;
     
-    bool hitOvertime = false;
+    bool hitOvertime;
 
     std::string injuryType;
     std::string name;
 
-    float salary = 20000.f;
+    float salary;
 
     Staff();
 
@@ -303,16 +303,17 @@ Staff::Staff()
     type = {};
     isPlayerMale = true;
     age = 0;
-    hoursOfWork = 0.f;
-    daysOfWork = 0;
+    hoursOfWork = 40.f;
+    daysOfWork = 5;
     hitOvertime = false;
-    injuryType = {};
+    injuryType = "None";
     salary = 0.f;
     name = {};
 }
 
 void Staff::goToWork(float numHoursToday)
 {
+    std::cout << "Standard working hours in a week for an employee must total " << hoursOfWork << " before they hit overtime." << std::endl;
     hoursOfWork -= numHoursToday;
     if(hoursOfWork < 0)
     {
@@ -337,24 +338,23 @@ bool Staff::signContract(float contractOffer)
 struct TeamProgram
 {
     //sex
-    bool isMale = true;
+    bool isMale{};
     //maximum age
-    int maxAge = 21;
+    int maxAge;
     //professional status
-    std::string profStatus = "Semi-Professional";
+    std::string profStatus{};
     //number of staff
-    int numCoaches = 6;
+    int numCoaches;
     //total number of programs
-    int numPlayersInProgram = 22;
-    int maxNumPlayersInProgram = 26;
+    int numPlayersInProgram = 0;
+    int maxNumPlayersInProgram;
 
-    float budgetPerAnnum;
-    float currentBalance;
+    float budgetPerAnnum = 0.f;
+    float currentBalance = 0.f;
 
-    bool isGameAtHome;
+    bool isGameAtHome = {};
     
-
-    TeamProgram();
+    TeamProgram() : maxAge(40), numCoaches(6), maxNumPlayersInProgram(24) {}
 
     //enter a league
     std::string enterALeague(float costToEnterLeague);
@@ -364,6 +364,7 @@ struct TeamProgram
     int advertiseForPlayers();
 };
 
+/*
 TeamProgram::TeamProgram()
 {
     isMale = true;
@@ -376,6 +377,7 @@ TeamProgram::TeamProgram()
     currentBalance = 0.f;
     isGameAtHome = true;
 }
+*/
 
 std::string TeamProgram::enterALeague(float costToEnterLeague)
 {
@@ -402,7 +404,7 @@ struct TrainingComplex
     //address of complex
     std::string address = "1234 Sports Street";
     //no of meals served in canteen a day
-    int numMealsServed = 122;
+    int numMealsServed;
     //maximum deadlift weight in gym
     float maxDeadliftWeight = 500.f;
     //no of lockers in locker room
@@ -417,7 +419,7 @@ struct TrainingComplex
     TrainingComplex();
 
     //host training session
-    int numOfFreeParkingSpaces(TeamProgram myTeam);
+    void numOfFreeParkingSpaces(TeamProgram myTeam);
     //feed staff
     float costToFeedStaff(int howManyStaffWorkingToday = 75, int numTrainingSessions = 2);
     //provide player rehab
@@ -426,18 +428,13 @@ struct TrainingComplex
 
 TrainingComplex::TrainingComplex()
 {
-    address = {};
     numMealsServed = 0;
-    maxDeadliftWeight = 0.f;
-    numLockers = 0;
-    numCarParkSpots = 0;
-    costPerMeal = 0.f;
     therapyType = {};
 }
 
-int TrainingComplex::numOfFreeParkingSpaces(TeamProgram myTeam)
+void TrainingComplex::numOfFreeParkingSpaces(TeamProgram myTeam)
 {
-    return (myTeam.numPlayersInProgram + myTeam.numCoaches) - numCarParkSpots;
+    std::cout << "The address of the complex is " << address << " and we have " << numCarParkSpots - (myTeam.numPlayersInProgram + myTeam.numCoaches)  << " car parking spots left most days" << std::endl;
 }
 
 float TrainingComplex::costToFeedStaff(int howManyStaffWorkingToday, int numTrainingSessions)
@@ -458,9 +455,9 @@ void TrainingComplex::providePlayerRehab(Staff player)
 struct Stadium
 {
     //capacity
-    int numSeats = 44000;
+    int numSeats;
     //stadium name
-    std::string name = "Paul Brown Stadium";
+    std::string name;
     //turf type (1 = grass, 2 = turf)
     int turfType = 1;
     //are executive boxes open
@@ -476,15 +473,15 @@ struct Stadium
     struct ConcessionStand
     {
         //stand type (1 for food/drink, 2 for merchandise)
-        int type = 1;
+        int type;
         //does it have a liqour license
-        bool hasLiquorLicense = false;
+        bool hasLiquorLicense;
         //min no of staff required to run it
-        int minNumStaffRequired = 6;
+        int minNumStaffRequired;
         //max no of staff required
-        int maxNumStaffRequired = 8;
+        int maxNumStaffRequired;
         //name of stand
-        std::string name = "Dave's magical hot-dogs";
+        std::string name;
 
         ConcessionStand();
 
@@ -496,23 +493,29 @@ struct Stadium
         std::string takeCustomerOrder();
     };
     
+    void printStadiumConstruct()
+    {
+        std::cout << "8) The stadiums name is the " << name << " and can hold up to " << numSeats << " fans." << std::endl;
+        std::cout << "As a standard, our Concession stand's " << (myConcessionStand.hasLiquorLicense ? "DO" : "DON'T") << " have a liquor license" << std::endl;
+    }
+
     //host an event
     void hostAnEvent(std::string eventType);
     //open gates
     void openGates();
     //staff a concession stand
-    int remainingTickets();
+    void remainingTickets();
 
     ConcessionStand myConcessionStand;
 };
 
 Stadium::Stadium()
 {
-    numSeats = 0;
-    name = {};
-    turfType = 0;
+    numSeats = 44000;
+    name = "Paul Brown Stadium";
+    turfType = 1;
     boxesOpen = true;
-    numStaircases = 0;                      
+    numStaircases = 22;                      
     gatesOpen = true;
     numTicketsSold = 0;
     myConcessionStand = {};
@@ -565,38 +568,38 @@ void Stadium::openGates()
     boxesOpen = true;
 }
 
-int Stadium::remainingTickets()
+void Stadium::remainingTickets()
 {
-    return numSeats-numTicketsSold;
+    std::cout << "Today we have " << numSeats-numTicketsSold << " tickets left for sale" << std::endl;
 }
 
 struct SupportersGroup
 {
     //name of group
-    std::string name = "Queen City Hooligans";
+    std::string name;
     //number of members
-    int numMembers = 120;
+    int numMembers;
     //num of season tickets in group
-    int numSeasonTickets = 60;
+    int numSeasonTickets;
     //merch discount
-    float merchDiscountFromClub = 10.f;
+    float merchDiscountFromClub;
     //cost of membership
-    float costOfMembership = 100.f;
+    float costOfMembership;
 
-    SupportersGroup();
+    SupportersGroup() : name("Queen City Hooligans"), numMembers (0), numSeasonTickets(60), merchDiscountFromClub(10.f), costOfMembership(100.f) {}
 
     struct Supporter
     {
         //jersey size
-        std::string jerseySize = "M";
+        std::string jerseySize;
         //location
-        std::string whereDoYouLive = "Cincinnati";
+        std::string whereDoYouLive;
         //distance from club's city
-        float distanceFromClubsCity = 123.f;
+        float distanceFromClubsCity;
         //season ticket holder
         bool isSeasonTicketHolder = false;
         //no of meetings attended
-        int numMeetingsAttended = 3;
+        int numMeetingsAttended;
 
         std::string name;
 
@@ -617,18 +620,8 @@ struct SupportersGroup
     //Email a member on their birthday
     void emailMemberOnBirthday();
 
-    Supporter mySupporter;
+    Supporter mySupporter = {};
 };
-
-SupportersGroup::SupportersGroup()
-{
-    name = {};
-    numMembers = 0;
-    numSeasonTickets = 0;
-    merchDiscountFromClub = 0.f;
-    costOfMembership = 0.f;
-    mySupporter= {};
-}
 
 SupportersGroup::Supporter::Supporter()
 {
@@ -673,7 +666,7 @@ float SupportersGroup::numSeasonTicketsPerMember()
 
 void SupportersGroup::emailMemberOnBirthday()
 {
-    std::cout << "Happy Birthday " << mySupporter.name << " from the " << name << std::endl;
+    std::cout << "Happy Birthday " << mySupporter.name << " from the " << name << ". Remember you get a discount of " << merchDiscountFromClub << "% if you want to buy yourself a present!" << std::endl;
 }
 
 struct SportsTeam
@@ -702,7 +695,7 @@ struct SportsTeam
 
 SportsTeam::SportsTeam()
 {
-    name = {};
+    name = "Dunder Mifflin United";
     staffMember = {};
     program = {};
     complex = {};
@@ -761,7 +754,8 @@ int main()
     std::cout << "Am I connected to a network to play online? " << (myXbox.connectToNetwork(56.7f) ? "Yes" : "No")<< "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
-
+    
+    
     //2) DOG
     Dog myLittlePup;
     std::cout << "\n";
@@ -778,25 +772,25 @@ int main()
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "3) Bicycle UDT" << "\n";
-    myLittleBike.wheelRimSize = 0.45f;
     myLittleBike.handlebarsType = 1;
-    std::cout << "You moved forwards by " << myLittleBike.moveForwards(3) << " meters" << "\n";
+    myLittleBike.moveForwards(3);
     myLittleBike.popWheelie();
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
 
+    
     //4) Electric Guitar
     ElectricGuitar myTelecaster;
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "4) Electric Guitar UDT" << "\n";
     myTelecaster.changeTone(false);
-    std::cout << "Tonepot is currently at: " << myTelecaster.tonepotSetting << "\n";
     std::cout << "Solo coming up!" << "\n";
     myTelecaster.changeTone(true);
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
 
+    
     //5) Staff
     Staff myStaffMember;
     std::cout << "\n";
@@ -804,13 +798,13 @@ int main()
     std::cout << "5) Staff UDT" << "\n";
     myStaffMember.name = "Michael Scott";
     myStaffMember.injuryType = "Muscular";
-    myStaffMember.hoursOfWork = 8.f;
     myStaffMember.goToWork(10.f);
     std::cout << "Did I hit Overtime yet? " << (myStaffMember.hitOvertime ? "Yes" : "No") << "\n";
     myStaffMember.attendMeeting();
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
-
+    
+    
     //6) Team Program
     TeamProgram myTeam;
     std::cout << "\n";
@@ -823,6 +817,7 @@ int main()
     float amountToEnterLeague = 10000.f;
     std::cout << (myTeam.currentBalance >= amountToEnterLeague ? myTeam.enterALeague(amountToEnterLeague) : "You don't have the funds to enter this league" ) << "\n";
     std::cout << "Current budget: $" << myTeam.currentBalance << "\n";
+    std::cout << "We have " << myTeam.advertiseForPlayers() << " spaces left in the team" << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
 
@@ -831,7 +826,7 @@ int main()
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "7) Training Complex UDT" << "\n";
-    std::cout << "Today we have " << myTrainingGround.numOfFreeParkingSpaces(myTeam) << " available" << "\n";
+    myTrainingGround.numOfFreeParkingSpaces(myTeam);
     myTrainingGround.costPerMeal = 1.23f;
     std::cout << "Total cost for meals will be: $" << myTrainingGround.costToFeedStaff(myTeam.numCoaches + myTeam.numPlayersInProgram, 2) << "\n";
     myTrainingGround.providePlayerRehab(myStaffMember);
@@ -843,24 +838,22 @@ int main()
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "8) Stadium UDT" << "\n";
-    myStadium.name = "Pam Beasley Stadium";
-    myStadium.numSeats = 30000;
     std::string todaysEvent = "Sports";
+    myStadium.numTicketsSold = 31138;
+    myStadium.remainingTickets();
     myStadium.hostAnEvent(todaysEvent);
     std::cout << "What type of turf do we have for the event today? " << (myStadium.turfType ? "Grass" : "Turf" ) << "\n";
     std::string customerOrder = myStadium.myConcessionStand.takeCustomerOrder();
     std::cout << (customerOrder == "Beer" ? myStadium.myConcessionStand.isCustomerOfAge(20) : "Order being processed!") << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
-
-        
+  
     //9) Supporters Group
     SupportersGroup mySupportersGroup;
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "9) Supporters Group UDT" << "\n";
     mySupportersGroup.mySupporter.name = "Jim Halpert";
-    mySupportersGroup.name = "Scranton City Hooligans";
     mySupportersGroup.emailMemberOnBirthday();
     mySupportersGroup.mySupporter.attendMeeting();
     std::cout << mySupportersGroup.mySupporter.name << " has attended " << mySupportersGroup.mySupporter.numMeetingsAttended << " club meeting(s)" "\n";
@@ -873,7 +866,6 @@ int main()
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "10) Sports Team UDT" << "\n";
-    mySportsTeam.name = "Scranton Paper FC";
     mySportsTeam.staffMember = myStaffMember;
     mySportsTeam.stadium = myStadium;
     mySportsTeam.program = myTeam;
