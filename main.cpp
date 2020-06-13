@@ -201,7 +201,7 @@ float Dog::exerciseTime()
 bool Dog::doesDogNeedAnymoreExercise()
 {   
     float maxTimeAllowed = exerciseTime();
-    for(int i = 0; i < maxTimeAllowed; i++)
+    for(int i = 0; i < maxTimeAllowed; ++i)
     {
         routine.currentSessionTime++;
         routine.totalTime++;
@@ -256,9 +256,10 @@ void Bicycle::moveForwards(int numOfRevolutions)
 {
     std::cout << "Our standard bike model has " << brakesModel << " brakes and the wheel rims have a diameter of " << wheelRimSize << " inches." << std::endl;
     int brakesPumped={};
-    while(brakesPumped < 3){
-     std::cout << "You moved forward by: " << (3.14f * wheelRimSize) * numOfRevolutions << std::endl;
-     brakesPumped++;
+    while(brakesPumped < 3)
+    {
+        std::cout << "You moved forward by: " << (3.14f * wheelRimSize) * numOfRevolutions << std::endl;
+        brakesPumped++;
     }
     std::cout << "You stopped moving." << std::endl;
 }
@@ -320,9 +321,10 @@ ElectricGuitar::ElectricGuitar()
 void ElectricGuitar::playEachFret()
 {
     std::cout << "Notes will be played every three frets" << std::endl;
-    for(int i=0;i<numFrets;i++)
+    for(int i=0;i<numFrets;++i)
     {
-        if(i%3 == 0){
+        if(i%3 == 0)
+        {
             std::cout << "Note played at fret " << i << std::endl;
         }
     }
@@ -416,7 +418,8 @@ void Staff::daysAndHoursCalculator(int dayType)
     {
         hoursOfWork -= 8.f;
         daysOfWork -= 1;
-    }else
+    }
+    else
     {
         hoursOfWork -= 4.f;
         daysOfWork -= 0.5;
@@ -497,14 +500,18 @@ std::string TeamProgram::enterALeague(float costToEnterLeague)
         return "We can't afford to enter this league";
     }
 
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; ++i)
     {
         currentBalance -= costToEnterLeague;
-        if(currentBalance < 0){
+        if(currentBalance < 0)
+        {
             return "We've run out of cash!";
-        }else{
+        }
+        else
+        {
             std::cout << "We can enter for another year" << std::endl;
-            if(i > 2){
+            if(i > 2)
+            {
                 std::cout << "We can enter the league for 3 seasons" << std::endl;
             }
         }
@@ -565,12 +572,15 @@ void TrainingComplex::numOfFreeParkingSpaces(int numStaffToday, TeamProgram myTe
 
     int numCarParkSpotsToday = {};
 
-    if(numStaffToday < numCarParkSpots){
-        for(int i=0; i<numStaffToday; i++){
+    if(numStaffToday < numCarParkSpots)
+    {
+        for(int i=0; i<numStaffToday; ++i){
             numCarParkSpotsToday++;
         }
         std::cout << "Today we have " << (numCarParkSpots - numCarParkSpotsToday) << " left" << std::endl;
-    }else{
+    }
+    else
+    {
         std::cout << "We don't have enough spots for everyone today - please try and car pull!" << std::endl;
     }  
 }
@@ -675,9 +685,11 @@ Stadium::ConcessionStand::ConcessionStand()
 
 std::string Stadium::ConcessionStand::staffStatus()
 {
-    if(numStaff < minNumStaffRequired){
+    if(numStaff < minNumStaffRequired)
+    {
         std::cout << "We need to hire some more guys!" << std::endl;
-        for(int i = 0; i < minNumStaffRequired; i++){
+        for(int i = 0; i < minNumStaffRequired; ++i)
+        {
             numStaff++;
         }
         return "We now have enough staff";
@@ -686,7 +698,7 @@ std::string Stadium::ConcessionStand::staffStatus()
     if(numStaff > maxNumStaffRequired){
         int numStaffToCut = numStaff - maxNumStaffRequired;
         std::cout << "We've got too many staff! Need to cut " << numStaffToCut << " staff from today's shift." << std::endl;
-        for(int i = 0; i < numStaffToCut; i++){
+        for(int i = 0; i < numStaffToCut; ++i){
             numStaff--;
         }
         return "We now have enough staff";
@@ -793,7 +805,7 @@ struct SupportersGroup
 float SupportersGroup::totalValueMerchSold(int numSupportersPurchasing)
 {
     float countingTotal={};
-    for(int i=0; i<numSupportersPurchasing; i++)
+    for(int i=0; i<numSupportersPurchasing; ++i)
     {
         countingTotal += mySupporter.totalCostOfMerchandise(89.99f);
     }
@@ -884,7 +896,7 @@ SportsTeam::SportsTeam()
 
 bool SportsTeam::doWeHaveATeam()
 {
-    for(int i = 0; i < program.maxNumPlayersInProgram; i++)
+    for(int i = 0; i < program.maxNumPlayersInProgram; ++i)
     {
         program.numPlayersInProgram++;
         if(program.numPlayersInProgram == program.maxNumPlayersInProgram)
@@ -1000,7 +1012,7 @@ int main()
     std::cout << "\n";
     std::cout << "-----------------------------------" << "\n";
     std::cout << "5) Staff UDT" << "\n";
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; ++i)
     {
         myStaffMember.daysAndHoursCalculator(1);
     }
