@@ -99,7 +99,7 @@ void GamesConsole::goingForRecordNumKills(int currentKillsInGame)
 
     while(currentKillsOnLevel <= recordNumKills)
     {
-        currentKillsOnLevel++;
+        ++currentKillsOnLevel;
         std::cout << "Still haven't beaten the record. Keep hunting." << std::endl;
     }
     recordNumKills = currentKillsOnLevel;
@@ -203,8 +203,8 @@ bool Dog::doesDogNeedAnymoreExercise()
     float maxTimeAllowed = exerciseTime();
     for(int i = 0; i < maxTimeAllowed; ++i)
     {
-        routine.currentSessionTime++;
-        routine.totalTime++;
+        ++routine.currentSessionTime;
+        ++routine.totalTime;
         
     }
 
@@ -259,7 +259,7 @@ void Bicycle::moveForwards(int numOfRevolutions)
     while(brakesPumped < 3)
     {
         std::cout << "You moved forward by: " << (3.14f * wheelRimSize) * numOfRevolutions << std::endl;
-        brakesPumped++;
+        ++brakesPumped;
     }
     std::cout << "You stopped moving." << std::endl;
 }
@@ -574,8 +574,9 @@ void TrainingComplex::numOfFreeParkingSpaces(int numStaffToday, TeamProgram myTe
 
     if(numStaffToday < numCarParkSpots)
     {
-        for(int i=0; i<numStaffToday; ++i){
-            numCarParkSpotsToday++;
+        for(int i=0; i<numStaffToday; ++i)
+        {
+            ++numCarParkSpotsToday;
         }
         std::cout << "Today we have " << (numCarParkSpots - numCarParkSpotsToday) << " left" << std::endl;
     }
@@ -690,7 +691,7 @@ std::string Stadium::ConcessionStand::staffStatus()
         std::cout << "We need to hire some more guys!" << std::endl;
         for(int i = 0; i < minNumStaffRequired; ++i)
         {
-            numStaff++;
+            ++numStaff;
         }
         return "We now have enough staff";
     }
@@ -698,8 +699,9 @@ std::string Stadium::ConcessionStand::staffStatus()
     if(numStaff > maxNumStaffRequired){
         int numStaffToCut = numStaff - maxNumStaffRequired;
         std::cout << "We've got too many staff! Need to cut " << numStaffToCut << " staff from today's shift." << std::endl;
-        for(int i = 0; i < numStaffToCut; ++i){
-            numStaff--;
+        for(int i = 0; i < numStaffToCut; ++i)
+        {
+            --numStaff;
         }
         return "We now have enough staff";
     }
@@ -838,7 +840,7 @@ float SupportersGroup::Supporter::totalCostOfMerchandise(float jerseyCost)
 
 void SupportersGroup::Supporter::attendMeeting()
 {
-    numMeetingsAttended++;
+    ++numMeetingsAttended;
 }
 
 float SupportersGroup::costOfAwayMatchTrip(int noOfSupporters)
@@ -898,7 +900,7 @@ bool SportsTeam::doWeHaveATeam()
 {
     for(int i = 0; i < program.maxNumPlayersInProgram; ++i)
     {
-        program.numPlayersInProgram++;
+        ++program.numPlayersInProgram;
         if(program.numPlayersInProgram == program.maxNumPlayersInProgram)
         {
             return true;
@@ -975,7 +977,7 @@ int main()
     myLittlePup.routine.numOfSessions = 1;
     myLittlePup.routine.totalTime = 40;
     std::cout << "Dog should be exercised for a futher " << myLittlePup.exerciseTime() - myLittlePup.routine.totalTime << " minutes" << std::endl;
-    myLittlePup.routine.numOfSessions++;
+    ++myLittlePup.routine.numOfSessions;
     std::cout << "After the second session, the dog " << (myLittlePup.doesDogNeedAnymoreExercise() ? "does not" : "does") << " need more exercise" << std::endl;
     std::cout << "-----------------------------------" << "\n";
     std::cout << "\n";
